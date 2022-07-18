@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/taskmanager/assets/images/check-circle-regular.svg">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"
+        integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/todo.css">
+
+    <!-- firebase scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src='../scripts/utils/firebase.js' type='module' defer></script>
+    <!--developer script-->
+    <script src="../scripts/controller/imp-controller.js" type="module" defer></script>
+
+    <title> Important Tasks | Task Manager </title>
+</head>
+
+<body>
+    <div class="container">
+        <header class="head-bar">
+            <i class="far fa-check-circle tasklogo"></i>
+            <h2 class='title'><a href="/taskmanager/index.html"> To Do </a></h2>
+            <div class='right-options'>
+                <div class="user-info">
+                    <span class="user-title" id="username">Administrator</span>
+                    <!-- <i class="fa fa-user"></i> -->
+                    <img id='userPicSrc' src='/taskmanager/assets/images/userpic.png'
+                        class='user-pic' alt='user-pic' />
+                        <!-- <img id='userPicSrc' src='https://th.bing.com/th/id/OIP.wNfUaNfqLB1TPeksmiB2DAHaHa?pid=ImgDet&w=512&h=512&rs=1' class='user-pic' alt='user-pic' />  -->
+                        <span id='google-signout' class="user-logout" >Logout</span>
+                </div>
+            </div>
+        </header>
+
+        <div class='wrapper'>
+            <div class='aside'>
+                <ul class="aside-menu">
+                    <li class='sidebar-head'>
+                        <i class="fa fa-xmark closehambg"></i>
+                    </li>
+                    <li>
+                        <a href='task-dashboard.html'>
+                            <i class="fa fa-chart-line mrg"></i> 
+                            <span>Dashboard </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='task-admin.html'>
+                            <i class="fa fa-circle-plus mrg"></i>
+                            <span>Manage Tasks</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='important-tasks.html'>
+                            <i class="fa fa-star mrg"></i>
+                            <span>Important Tasks</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='#'>
+                            <i class="fa fa-trash mrg"></i>
+                            <span>Deleted Tasks</span>
+                        </a>
+                    </li>
+               </ul>
+            </div>
+            <div class="task-mgr-section">
+                <div class='status-bar'>
+                    <i class="fa fa-bars hambg"></i>
+                    <span class='task-service'> Task Manager </span>
+                    <span id='Date'></span>
+                    <span id='Time'></span>
+                </div>
+                <div id='root' class="custom-task">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="/taskmanager/index.html">Home</a></li>
+                          <li class="breadcrumb-item" aria-current="page">Important Tasks</li>
+                        </ol>
+                    </nav>
+                    <div class='task-table' style="height:500px; margin-top:2rem;">
+                            <table>
+                                <thead id='tablehead'>
+                                    <tr>
+                                        <th>Task Id</th>
+                                        <th>Task</th>
+                                        <th>Description</th>
+                                        <th>Date</th>
+                                        <th>Status</th/>
+                                    </tr>
+                                </thead>
+                                <tbody id='task-field'>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <div id="developer-info"></div>
+                <div id='copyright'></div>
+                <a id='contact-link' href="https://github.com/anishVermaIsHere"></a>
+            </footer>
+    </div>
+</body>
+
+</html>

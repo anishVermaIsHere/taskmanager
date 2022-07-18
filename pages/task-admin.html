@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/taskmanager/assets/images/check-circle-regular.svg">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"
+        integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/todo.css">
+
+    <!-- firebase scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src='../scripts/utils/firebase.js' type='module' defer></script>
+    <!--developer script-->
+    <script src='../scripts/controller/controller.js' type='module' defer></script>
+  
+    <title>Manage Tasks | Task Manager </title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="head-bar">
+            <i class="far fa-check-circle tasklogo"></i>
+            <h2 class='title'><a href="/taskmanager/index.html"> To Do </a></h2>
+            <div class='right-options'>
+                <div class="user-info">
+                    <span class="user-title" id="username">Administrator</span>
+                    <!-- <i class="fa fa-user"></i> -->
+                    <img id='userPicSrc' src='/taskmanager/assets/images/userpic.png'
+                        class='user-pic' alt='user-pic' />
+                    <span id='google-signout' class="user-logout" >Logout</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class='wrapper'>
+            <div class='aside'>
+                <ul class="aside-menu">
+                    <li class='sidebar-head'>
+                        <i class="fa fa-xmark closehambg"></i>
+                    </li>
+                    <li>
+                        <a href='task-dashboard.html'>
+                            <i class="fa fa-chart-line mrg"></i> 
+                            <span>Dashboard </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='task-admin.html'>
+                            <i class="fa fa-circle-plus mrg"></i>
+                            <span>Manage Tasks</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='important-tasks.html'>
+                            <i class="fa fa-star mrg"></i>
+                            <span>Important Tasks</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='#'>
+                            <i class="fa fa-trash mrg"></i>
+                            <span>Deleted Tasks</span>
+                        </a>
+                    </li>
+               </ul>
+            </div>
+            <div class="task-mgr-section">
+                <div class='status-bar'>
+                    <i class="fa fa-bars hambg"></i>
+                    <span class='task-service'> Task Manager </span>
+                    <span id='Date'></span>
+                    <span id='Time'></span>
+                </div>
+                <div class="custom-task">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="/taskmanager/index.html">Home</a></li>
+                          <li class="breadcrumb-item" aria-current="page">Manage Tasks</li>
+                        </ol>
+                    </nav>
+                    <!-- task form -->
+                    <form name='task-form' autocomplete="off">
+                        <div class="field-section">
+                            <div class="form-group">
+                                <span>ID</span>
+                                <div id='id'></div>
+                            </div>
+                            <div class="form-group">
+                                <span>Name of Task</span>
+                                <input type="text" id='name' placeholder="Enter your task" required />
+                                <div id="errorTaskName"></div>
+                            </div>
+                        </div>
+                        <div class="field-section">
+                            <div class="form-group">
+                                <span>Description</span>
+                                <textarea id="desc" name="desc" rows="4" cols="30"
+                                    placeholder="Enter your description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <span>Date</span>
+                                <input type="date" id='date' required />
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <div id='dialog-section'></div>
+
+                    <!-- <div class='button-group'> -->
+                        <div class="button-top">
+                            <button id='add' title="Add">
+                                <i class="fa fa-circle-plus"></i> Add
+                            </button>
+                            <button id='delete' title="Delete">
+                                <i class="fa fa-trash"></i> Delete
+                            </button>
+                            <button id='reset' title="Load from Database">
+                                <i class="fa-solid fa-arrow-rotate-left"></i> Reset Form
+                            </button>
+                        </div>
+                    <!-- </div> -->
+                    <!-- <div class='live'></div> -->
+                    <div class='button-group'>
+                        <div class="button-left">
+                            <button id='update' title="Update">
+                                <i class="fa fa-pencil"></i> Update
+                            </button>
+                            <button id='delete-all' title="Delete All">
+                                <i class="fa fa-trash"></i> Delete All
+                            </button>
+                            <button id='save' title="Save">
+                                <i class="fa fa-floppy-disk"></i> Save
+                            </button>
+                            <button id='savetodb' title="Save to DB">
+                                <i class="fa fa-floppy-disk"></i> Save to DB
+                            </button>
+                            <button id='load' title="Load">
+                                <i class="fa fa-file-waveform"></i> Load
+                            </button>
+                            <button id='loaddb' title="Load from Database">
+                                <i class="fa fa-database"></i> Load from DB
+                            </button>
+                        </div>
+                        <div class="button-right">
+                            <form name="search-frm" id="search-frm">
+                            <div class='search-section'>
+                                <input text='search' id='search-bar' name='search' placeholder="Search tasks by id or name">
+                                <button id="clear-search-btn">
+                                    <i class="fa fa-xmark clear-search"></i>
+                                </button>
+                                <button type="submit" id="search-btn">
+                                    <i class="fa fa-magnifying-glass searchicon"></i>
+                                </button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id='dialog'></div>
+
+                    <div class='task-table-container'>
+                        <div class="task-head">
+                            <span class="task-head-item">
+                                <i class="fa fa-trash"></i>
+                                <span id='mark'></span>
+                            </span>
+                            <span class="task-head-item">
+                                <i class="fa fa-list"></i>
+                                <span id='unmark'></span>
+                            </span>
+                            <span class="task-head-item">
+                                <i class="fa fa-star"></i>
+                                <span id="important"></span>
+                            </span>
+                            <span class="task-head-item">
+                                Total <span id='total'></span>
+                            </span>
+                            <span class="task-head-item">
+                                <i id='print' class="fa fa-print"></i>
+                            </span>
+                            <label for="task">
+                                <i class="fa fa-filter mrg"></i>
+                            </label>
+                            <select id="task-filter" name="cars">
+                                <option value="0" id="0"> Filter:</option>
+                                <option value="1">Important</option>
+                                <option value="2">Marked</option>
+                                <option value="3">Unmarked</option>
+                                <option value="3">Updated</option>
+                            </select>
+                            <label for="task">
+                                <i class="fa fa-sort mrg"></i>
+                            </label>
+                            <select id="task-filter" name="cars">
+                                <option value="0" id="0"> Sort by:</option>
+                                <option value="1">Name</option>
+                                <option value="2">Date</option>
+                            </select>
+                            
+                        </div>
+                    <div class='task-table'>
+                            <table>
+                                <thead id='tablehead'>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name of Task</th>
+                                        <th>Description</th>
+                                        <th>Date</th>
+                                        <th>
+                                            Status
+                                            <!-- <span id="status-bar"></span> -->
+                                        </th/>
+                                        <th>Action </th>
+                                    </tr>
+                                </thead>
+                                <tbody id='task-field'>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <footer>
+            <div id="developer-info"></div>
+            <div id='copyright'></div>
+            <a id='contact-link' href="https://github.com/anishVermaIsHere"></a>
+        </footer>
+
+    </div>
+    
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/taskmanager/assets/images/check-circle-regular.svg">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="assets/todo-login.css">
+
+    <!--firebase scripts-->
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+    <!--developer script-->
+    <script src='scripts/utils/login-controller.js' type="module"></script>
+    <script src='scripts/utils/firebase.js' type='module'></script>
+
+
+    <title>Login | To Do </title>
+</head>
+<body>
+    <div class="main-container">
+        <div class="img-container">
+            <img src='https://www.humanresources.org/wp-content/uploads/2021/08/checklist-management-FB-1.png' class='loginbgimg'/>
+        </div>
+    <div class='load'>
+    </div>
+    <div class='login-card'>
+    <div class='login-frame'>
+        <span class="todo-logo">
+            <i class="far fa-check-circle tasklogo"></i>
+            To Do
+        </span>
+        <h3 class='login-title'>Login</h3>
+        <div class='login-container'>
+            <button class='login-other' id='google-signin'>
+                <i class="fa-brands fa-google"></i>
+                Continue with Google
+            </button>
+            <button class='login-other' id='fb-signin'>
+                <i class="fa-brands fa-facebook-f"></i>
+                Continue with Facebook
+            </button>
+            <button class='login-other' id='apple-signin'>
+                <i class="fa-brands fa-apple"></i>
+                Continue with Apple
+            </button>
+
+            <!-- <div class='boundary'>
+                <div class='seperator'>OR</div>
+            </div>
+
+            <label class='main-label'>Email</label>
+            <input type="email" name="email"/>
+
+            <label class='main-label'>Password</label>
+            <input type="password" name="password"/>
+
+            <button type='submit' class='login-btn' id='login'>Login</button>
+
+            <label>
+                <input type="checkbox" name="keep-login"/>
+                Keep me logged in
+            </label>
+            <label>
+                <a>Forgot your Password?</a>
+            </label> -->
+        </div>
+        <!-- <div class='help-block'>
+            Don't have an account? 
+            <a class='signup'>Create Account</a>
+        </div> -->
+    </div>
+</div>
+</div>
+</body>
+</html>
