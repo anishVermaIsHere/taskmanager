@@ -14,7 +14,7 @@ export const taskManage={
         return task;
     },
     delete:function() {
-        this.taskList=this.taskList.filter((task)=>!task.isMarked);
+        this.taskList=this.taskList.filter((task)=>!task.marked);
         return this.taskList;
     },
     deleteAll:function(){
