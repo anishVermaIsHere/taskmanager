@@ -12,5 +12,5 @@ the app link is https://anishvermaishere.github.io/taskmanager/
  
  4. After installation live server, then right click and click option **Open with live server**.
  
- 5. Now the Music app will run successfully.
+ 5. Now the Task manager app will run successfully.
  
